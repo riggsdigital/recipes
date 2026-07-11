@@ -232,3 +232,116 @@ function confirmDeleteFromRecipe(slug, title, indexUrl) {
   setHidden(slug, true);
   window.location.href = indexUrl;
 }
+
+// ---------- Search, tag filter, and sort on the table of contents ----------
+
+function initTocControls() {
+  const searchBox = document.getElementById('search-box');
+  const tagFiltersEl = document.getElementById('tag-filters');
+  const sortSelect = document.getElementById('sort-select');
+  const list = document.getElementById('recipe-list');
+  if (!list) return;
+
+  const tiles = Array.from(list.querySelectorAll('.recipe-tile-wrap'));
+  let activeTag = null;
+
+  // Build tag filter buttons from every tile's data-tags
+  const allTags = new Set();
+  tiles.forEach((t) => {
+    (t.getAttribute('data-tags') || '')
+      .split(',').map((s) => s.trim().toLowerCase()).filter(Boolean)
+      .forEach((tag) => allTags.add(tag));
+  });
+
+  if (tagFiltersEl && allTags.size) {
+    const allBtn = document.createElement('button');
+    allBtn.className = 'tag-btn active';
+    allBtn.textContent = 'All';
+    allBtn.addEventListener('click', () => setActiveTag(null));
+    tagFiltersEl.appendChild(allBtn);
+
+    Array.from(allTags).sort().forEach((tag) => {
+      const btn = document.createElement('button');
+      btn.className = 'tag-btn';
+      btn.textContent = tag;
+      btn.addEventListener('click', () => setActiveTag(tag));
+      tagFiltersEl.appendChild(btn);
+    });
+  }
+
+  function setActiveTag(tag) {
+    activeTag = tag;
+    if (tagFiltersEl) {
+      tagFiltersEl.querySelectorAll('.tag-btn').forEach((btn) => {
+        const isAll = btn.textContent === 'All';
+        btn.classList.toggle('active', tag === null ? isAll : btn.textContent === tag);
+      });
+    }
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const query = ((searchBox && searchBox.value) || '').trim().toLowerCase();
+    tiles.forEach((tile) => {
+      if (isHidden(tile.getAttribute('data-slug'))) { tile.style.display = 'none'; return; }
+      const title = (tile.querySelector('h2') || {}).textContent || '';
+      const tags = (tile.getAttribute('data-tags') || '').toLowerCase();
+      const matchesQuery = !query || title.toLowerCase().includes(query) || tags.includes(query);
+      const tagList = tags.split(',').map((s) => s.trim());
+      const matchesTag = !activeTag || tagList.includes(activeTag);
+      tile.style.display = (matchesQuery && matchesTag) ? '' : 'none';
+    });
+  }
+
+  function applySort() {
+    const mode = sortSelect ? sortSelect.value : 'recent';
+    const sorted = tiles.slice().sort((a, b) => {
+      if (mode === 'alpha') {
+        const ta = (a.querySelector('h2') || {}).textContent || '';
+        const tb = (b.querySelector('h2') || {}).textContent || '';
+        return ta.localeCompare(tb);
+      }
+      if (mode === 'rating') {
+        return getRating(b.getAttribute('data-slug')) - getRating(a.getAttribute('data-slug'));
+      }
+      const da = a.getAttribute('data-added') || '';
+      const db = b.getAttribute('data-added') || '';
+      return db.localeCompare(da); // newest first
+    });
+    sorted.forEach((tile) => list.appendChild(tile));
+  }
+
+  if (searchBox) searchBox.addEventListener('input', applyFilters);
+  if (sortSelect) sortSelect.addEventListener('change', applySort);
+
+  applyFilters();
+  applySort();
+}
+
+// ---------- Personal notes (per recipe, saved like ratings) ----------
+
+function initPersonalNotes(slug) {
+  const textarea = document.getElementById('personal-notes');
+  const status = document.getElementById('notes-status');
+  if (!textarea) return;
+
+  const storageKey = 'notes:' + slug;
+  const existing = _hasStorage ? (localStorage.getItem(storageKey) || '') : (_memoryNotes[slug] || '');
+  textarea.value = existing;
+
+  let saveTimer = null;
+  textarea.addEventListener('input', () => {
+    if (status) status.textContent = 'Saving\u2026';
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      if (_hasStorage) {
+        localStorage.setItem(storageKey, textarea.value);
+      } else {
+        _memoryNotes[slug] = textarea.value;
+      }
+      if (status) status.textContent = textarea.value ? 'Saved on this device' : '';
+    }, 400);
+  });
+  if (status) status.textContent = existing ? 'Saved on this device' : '';
+}
+const _memoryNotes = {};

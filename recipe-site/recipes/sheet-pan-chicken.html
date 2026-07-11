@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sheet Pan Chicken with Vegetables</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Recipes">
+<meta name="theme-color" content="#ffffff">
 </head>
 <body>
 
@@ -27,6 +32,7 @@
       <span><strong id="servings-count">4</strong> servings</span>
       <div class="servings-btn" id="servings-plus">+</div>
     </div>
+    <div class="time-pill">&#9200; 15 min prep &middot; 30 min cook</div>
     <div>
       <div class="star-rating" id="star-rating"></div>
       <div class="rating-label" id="rating-label"></div>
@@ -100,6 +106,12 @@
     Swap in green beans, zucchini, or carrots for the broccoli/pepper if you prefer. Potatoes are fine here &mdash; just keep portions in mind if you're watching total carbs for the day.
   </div>
 
+  <hr>
+
+  <h2 class="section-title">Your Notes</h2>
+  <textarea class="notes-field" id="personal-notes" placeholder="Jot down tweaks, substitutions, how it turned out&hellip;"></textarea>
+  <div class="notes-status" id="notes-status"></div>
+
   <span class="delete-recipe-link"
         onclick="confirmDeleteFromRecipe('sheet-pan-chicken', 'Sheet Pan Chicken with Vegetables', '../index.html')">
     Delete this recipe
@@ -111,6 +123,7 @@
 <script>
   initStarRating('sheet-pan-chicken');
   initServings(4);
+  initPersonalNotes('sheet-pan-chicken');
 </script>
 </body>
 </html>
