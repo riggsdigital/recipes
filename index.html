@@ -17,17 +17,17 @@
 
 <div class="recipe-list">
 
-  <a class="recipe-tile" href="recipes/sheet-pan-chicken.html" data-slug="sheet-pan-chicken">
-    <img src="assets/sheet_pan_hero.png" alt="Sheet Pan Chicken with Vegetables">
-    <div class="recipe-tile-body">
-      <h2>Sheet Pan Chicken with Vegetables</h2>
-      <p>Chicken thighs roasted with potatoes and vegetables &mdash; serves 4</p>
-      <span class="tile-stars">Not yet rated</span>
-    </div>
-    <button class="tile-delete" data-slug="sheet-pan-chicken" data-title="Sheet Pan Chicken with Vegetables"
-            aria-label="Delete recipe"
-            onclick="event.preventDefault(); event.stopPropagation(); confirmDeleteTile(this);">&times;</button>
-  </a>
+  <div class="recipe-tile-wrap" data-slug="sheet-pan-chicken">
+    <a class="recipe-tile" href="recipes/sheet-pan-chicken.html">
+      <img src="assets/sheet_pan_hero.png" alt="Sheet Pan Chicken with Vegetables">
+      <div class="recipe-tile-body">
+        <h2>Sheet Pan Chicken with Vegetables</h2>
+        <p>Chicken thighs roasted with potatoes and vegetables &mdash; serves 4</p>
+        <span class="tile-stars">Not yet rated</span>
+      </div>
+    </a>
+    <button class="tile-delete" data-title="Sheet Pan Chicken with Vegetables" aria-label="Delete recipe">&times;</button>
+  </div>
 
   <!-- Add new recipe tiles here, following the same pattern -->
 
@@ -37,6 +37,7 @@
 <script>
   renderTocStars();
   applyHiddenTiles();
+  wireDeleteButtons();
 </script>
 </body>
 </html>

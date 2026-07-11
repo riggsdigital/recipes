@@ -36,6 +36,9 @@ body {
   display: grid;
   gap: 14px;
 }
+.recipe-tile-wrap {
+  position: relative;
+}
 .recipe-tile {
   display: flex;
   align-items: center;
@@ -43,7 +46,7 @@ body {
   background: #fff;
   border: 1px solid #e6e6e6;
   border-radius: 16px;
-  padding: 14px;
+  padding: 14px 50px 14px 14px;
   text-decoration: none;
   color: inherit;
   transition: box-shadow 0.15s ease, transform 0.15s ease;
@@ -79,7 +82,10 @@ body {
   letter-spacing: 1px;
 }
 .tile-delete {
-  flex-shrink: 0;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
   width: 30px; height: 30px;
   border-radius: 50%;
   border: 1px solid #eee;
@@ -231,12 +237,12 @@ h2.section-title { font-size: 19px; margin: 0 0 14px 0; font-weight: 700; }
   .toc-header h1 { font-size: 23px; }
   .toc-header p { font-size: 14px; }
 
-  .recipe-tile { padding: 10px; gap: 12px; border-radius: 14px; }
+  .recipe-tile { padding: 10px 44px 10px 10px; gap: 12px; border-radius: 14px; }
   .recipe-tile img { width: 64px; height: 64px; border-radius: 10px; }
   .recipe-tile-body h2 { font-size: 15px; }
   .recipe-tile-body p { font-size: 12.5px; white-space: normal; }
   .tile-stars { font-size: 13px; }
-  .tile-delete { width: 34px; height: 34px; font-size: 18px; }
+  .tile-delete { width: 34px; height: 34px; font-size: 18px; top: 8px; right: 8px; }
 
   .card { padding: 16px; border-radius: 16px; }
   .photo-strip img { height: 200px; }

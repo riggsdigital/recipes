@@ -73,7 +73,7 @@ function initStarRating(slug) {
 }
 
 function renderTocStars() {
-  document.querySelectorAll('[data-slug]').forEach((tile) => {
+  document.querySelectorAll('.recipe-tile-wrap[data-slug]').forEach((tile) => {
     const slug = tile.getAttribute('data-slug');
     const starsEl = tile.querySelector('.tile-stars');
     if (!starsEl) return;
@@ -163,7 +163,7 @@ function setHidden(slug, value) {
 
 function applyHiddenTiles() {
   let hiddenCount = 0;
-  document.querySelectorAll('[data-slug]').forEach((tile) => {
+  document.querySelectorAll('.recipe-tile-wrap[data-slug]').forEach((tile) => {
     if (isHidden(tile.getAttribute('data-slug'))) {
       tile.style.display = 'none';
       hiddenCount++;
@@ -183,7 +183,7 @@ function applyHiddenTiles() {
   link.textContent = 'show them';
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    document.querySelectorAll('[data-slug]').forEach((tile) => {
+    document.querySelectorAll('.recipe-tile-wrap[data-slug]').forEach((tile) => {
       setHidden(tile.getAttribute('data-slug'), false);
       tile.style.display = '';
     });
@@ -192,10 +192,25 @@ function applyHiddenTiles() {
   banner.appendChild(link);
 }
 
+// Wires every .tile-delete button on the page. Attaching listeners in JS
+// (rather than inline onclick) avoids quirks with click events on controls
+// nested near links, and keeps navigation reliably blocked on all browsers.
+function wireDeleteButtons() {
+  document.querySelectorAll('.tile-delete').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      confirmDeleteTile(btn);
+    });
+  });
+}
+
 // Delete button on a table-of-contents tile
 function confirmDeleteTile(btn) {
-  const slug = btn.getAttribute('data-slug');
+  const wrap = btn.closest('.recipe-tile-wrap');
+  const slug = wrap ? wrap.getAttribute('data-slug') : null;
   const title = btn.getAttribute('data-title') || 'this recipe';
+  if (!slug) return;
   const sure = window.confirm(
     'Delete "' + title + '"?\n\n' +
     'This removes it from your list on this device (you can undo it right after). ' +
