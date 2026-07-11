@@ -1,4 +1,5 @@
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   padding: 32px 16px;
@@ -188,4 +189,31 @@ h2.section-title { font-size: 19px; margin: 0 0 14px 0; font-weight: 700; }
 .notes {
   font-size: 14.5px; line-height: 1.6; color: #333;
   background: #fafafa; border-radius: 12px; padding: 14px 16px;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+  body { padding: 20px 12px; }
+
+  .toc-header h1 { font-size: 23px; }
+  .toc-header p { font-size: 14px; }
+
+  .recipe-tile { padding: 10px; gap: 12px; border-radius: 14px; }
+  .recipe-tile img { width: 64px; height: 64px; border-radius: 10px; }
+  .recipe-tile-body h2 { font-size: 15px; }
+  .recipe-tile-body p { font-size: 12.5px; white-space: normal; }
+  .tile-stars { font-size: 13px; }
+
+  .card { padding: 16px; border-radius: 16px; }
+  .photo-strip img { height: 200px; }
+  h1.recipe-title { font-size: 21px; }
+  .subtitle { font-size: 14px; }
+
+  .meta-row { flex-direction: column; align-items: flex-start; }
+  .star-rating { font-size: 26px; } /* bigger tap targets on touch */
+
+  h2.section-title { font-size: 17px; }
+  .ingredients li { font-size: 14.5px; }
+  .step-body strong { font-size: 14.5px; }
+  .step-body p { font-size: 14px; }
 }
