@@ -345,3 +345,11 @@ function initPersonalNotes(slug) {
   if (status) status.textContent = existing ? 'Saved on this device' : '';
 }
 const _memoryNotes = {};
+
+// Opens an image search in a new tab so the user can browse and pick a
+// photo themselves — avoids embedding any copyrighted search-result image
+// directly into the site.
+function openImageSearch(query) {
+  const url = 'https://www.google.com/search?tbm=isch&q=' + encodeURIComponent(query);
+  window.open(url, '_blank');
+}
