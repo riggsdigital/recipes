@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel's Recipes</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Recipes">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+<div class="toc-header">
+  <h1>Daniel's Recipes</h1>
+  <p>Click a recipe to open its full card.</p>
+</div>
+
+<div class="hidden-banner" id="hidden-banner"></div>
+
+<div class="toc-controls">
+  <input type="text" id="search-box" placeholder="Search recipes or tags&hellip;">
+  <select id="sort-select">
+    <option value="recent">Most recently added</option>
+    <option value="alpha">A&ndash;Z</option>
+    <option value="rating">Highest rated</option>
+  </select>
+</div>
+<div class="tag-filters" id="tag-filters"></div>
+
+<div class="recipe-list" id="recipe-list">
+
+  <div class="recipe-tile-wrap" data-slug="sheet-pan-chicken" data-tags="chicken, quick, meal prep" data-added="2026-07-11">
+    <a class="recipe-tile" href="recipes/sheet-pan-chicken.html">
+      <img src="assets/sheet_pan_hero.png" alt="Sheet Pan Chicken with Vegetables">
+      <div class="recipe-tile-body">
+        <h2>Sheet Pan Chicken with Vegetables</h2>
+        <p>Chicken thighs roasted with potatoes and vegetables &mdash; serves 4</p>
+        <div class="tile-meta-row">
+          <span class="tile-stars">Not yet rated</span>
+          <span class="tile-time">&#9200; 45 min</span>
+        </div>
+      </div>
+    </a>
+    <button class="tile-delete" data-title="Sheet Pan Chicken with Vegetables" aria-label="Delete recipe">&times;</button>
+  </div>
+
+  <div class="recipe-tile-wrap" data-slug="meatballs-marinara" data-tags="beef, italian, quick" data-added="2026-07-11">
+    <a class="recipe-tile" href="recipes/meatballs-marinara.html">
+      <div class="tile-photo-placeholder">No photo yet</div>
+      <div class="recipe-tile-body">
+        <h2>Baked Meatballs with Marinara and Mozzarella</h2>
+        <p>Baked meatballs simmered in marinara, topped with melted mozzarella &mdash; serves 4</p>
+        <div class="tile-meta-row">
+          <span class="tile-stars">Not yet rated</span>
+          <span class="tile-time">&#9200; 40 min</span>
+        </div>
+      </div>
+    </a>
+    <button class="tile-delete" data-title="Baked Meatballs with Marinara and Mozzarella" aria-label="Delete recipe">&times;</button>
+  </div>
+
+  <!-- Add new recipe tiles here, following the same pattern.
+       data-tags: comma-separated, lowercase, used for search + filter buttons
+       data-added: YYYY-MM-DD, used for "most recently added" sort -->
+
+</div>
+
+<script src="assets/ratings.js"></script>
+<script>
+  renderTocStars();
+  applyHiddenTiles();
+  wireDeleteButtons();
+  initTocControls();
+</script>
+</body>
+</html>

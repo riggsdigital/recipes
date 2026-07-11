@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheet Pan Chicken with Vegetables</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Recipes">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+<div class="back-link-wrap">
+  <a class="back-link" href="../index.html">&larr; All recipes</a>
+</div>
+
+<div class="card">
+
+  <div class="photo-strip">
+    <img src="../assets/sheet_pan_hero.png" alt="Sheet pan chicken with roasted vegetables">
+  </div>
+
+  <h1 class="recipe-title">Sheet Pan Chicken with Vegetables</h1>
+  <p class="subtitle">A simple one-pan dinner &mdash; chicken thighs roasted with potatoes and vegetables.</p>
+
+  <div class="meta-row">
+    <div class="servings-pill">
+      <div class="servings-btn" id="servings-minus">&minus;</div>
+      <span><strong id="servings-count">4</strong> servings</span>
+      <div class="servings-btn" id="servings-plus">+</div>
+    </div>
+    <div class="time-pill">&#9200; 15 min prep &middot; 30 min cook</div>
+    <div>
+      <div class="star-rating" id="star-rating"></div>
+      <div class="rating-label" id="rating-label"></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2 class="section-title">Ingredients</h2>
+  <ul class="ingredients">
+    <li data-amount="8" data-unit="" data-name="boneless skinless chicken thighs">8 boneless skinless chicken thighs</li>
+    <li data-amount="1.5" data-unit="pounds" data-name="baby potatoes, halved">1.5 pounds baby potatoes, halved</li>
+    <li data-amount="1" data-unit="pound" data-name="broccoli florets">1 pound broccoli florets</li>
+    <li data-amount="2" data-unit="" data-name="red bell peppers, sliced">2 red bell peppers, sliced</li>
+    <li data-amount="3" data-unit="tablespoons" data-name="olive oil">3 tablespoons olive oil</li>
+    <li data-amount="4" data-unit="" data-name="garlic cloves, minced">4 garlic cloves, minced</li>
+    <li data-amount="1" data-unit="teaspoon" data-name="smoked paprika">1 teaspoon smoked paprika</li>
+    <li data-amount="1" data-unit="teaspoon" data-name="dried oregano">1 teaspoon dried oregano</li>
+    <li data-amount="1" data-unit="teaspoon" data-name="salt">1 teaspoon salt</li>
+    <li data-amount="0.5" data-unit="teaspoon" data-name="black pepper">0.5 teaspoon black pepper</li>
+    <li data-amount="1" data-unit="" data-name="lemon, cut into wedges">1 lemon, cut into wedges</li>
+  </ul>
+
+  <hr>
+
+  <h2 class="section-title">Steps</h2>
+  <ol class="steps">
+    <li class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Preheat oven</strong>
+        <p>Preheat oven to 425&deg;F (220&deg;C). Line a large sheet pan with foil or parchment.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Toss potatoes</strong>
+        <p>Toss baby potatoes with 1 tbsp of the olive oil, half the garlic, and a pinch of salt and pepper. Spread on the pan and roast alone to give them a head start.</p>
+        <span class="timer-chip">&#9200; 10:00</span>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Season chicken and vegetables</strong>
+        <p>While potatoes roast, toss chicken thighs, broccoli, and bell peppers with remaining olive oil, garlic, smoked paprika, oregano, salt, and pepper.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <strong>Roast everything together</strong>
+        <p>Add the chicken and vegetables to the pan with the potatoes, spreading everything in a single layer. Roast about 20 minutes, until chicken is cooked through (internal temp 165&deg;F) and vegetables are tender.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <strong>Rest and serve</strong>
+        <p>Let chicken rest, then squeeze lemon wedges over everything before serving.</p>
+        <span class="timer-chip">&#9200; 05:00</span>
+      </div>
+    </li>
+  </ol>
+
+  <hr>
+
+  <h2 class="section-title">Notes</h2>
+  <div class="notes">
+    Swap in green beans, zucchini, or carrots for the broccoli/pepper if you prefer. Potatoes are fine here &mdash; just keep portions in mind if you're watching total carbs for the day.
+  </div>
+
+  <hr>
+
+  <h2 class="section-title">Your Notes</h2>
+  <textarea class="notes-field" id="personal-notes" placeholder="Jot down tweaks, substitutions, how it turned out&hellip;"></textarea>
+  <div class="notes-status" id="notes-status"></div>
+
+  <span class="delete-recipe-link"
+        onclick="confirmDeleteFromRecipe('sheet-pan-chicken', 'Sheet Pan Chicken with Vegetables', '../index.html')">
+    Delete this recipe
+  </span>
+
+</div>
+
+<script src="../assets/ratings.js"></script>
+<script>
+  initStarRating('sheet-pan-chicken');
+  initServings(4);
+  initPersonalNotes('sheet-pan-chicken');
+</script>
+</body>
+</html>
