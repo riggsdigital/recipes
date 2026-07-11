@@ -78,6 +78,35 @@ body {
   color: #d9a441;
   letter-spacing: 1px;
 }
+.tile-delete {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  background: #fafafa;
+  color: #999;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.tile-delete:hover { background: #fdecea; border-color: #f3c8c3; color: #c0392b; }
+.hidden-banner {
+  display: none;
+  max-width: 760px;
+  margin: 0 auto 14px auto;
+  font-size: 13.5px;
+  color: #777;
+}
+.hidden-banner a { color: #444; }
+.delete-recipe-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 13.5px;
+  color: #999;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.delete-recipe-link:hover { color: #c0392b; }
 
 /* ---------- Recipe card ---------- */
 .back-link {
@@ -207,6 +236,7 @@ h2.section-title { font-size: 19px; margin: 0 0 14px 0; font-weight: 700; }
   .recipe-tile-body h2 { font-size: 15px; }
   .recipe-tile-body p { font-size: 12.5px; white-space: normal; }
   .tile-stars { font-size: 13px; }
+  .tile-delete { width: 34px; height: 34px; font-size: 18px; }
 
   .card { padding: 16px; border-radius: 16px; }
   .photo-strip img { height: 200px; }

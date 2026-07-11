@@ -13,6 +13,8 @@
   <p>Click a recipe to open its full card.</p>
 </div>
 
+<div class="hidden-banner" id="hidden-banner"></div>
+
 <div class="recipe-list">
 
   <a class="recipe-tile" href="recipes/sheet-pan-chicken.html" data-slug="sheet-pan-chicken">
@@ -22,6 +24,9 @@
       <p>Chicken thighs roasted with potatoes and vegetables &mdash; serves 4</p>
       <span class="tile-stars">Not yet rated</span>
     </div>
+    <button class="tile-delete" data-slug="sheet-pan-chicken" data-title="Sheet Pan Chicken with Vegetables"
+            aria-label="Delete recipe"
+            onclick="event.preventDefault(); event.stopPropagation(); confirmDeleteTile(this);">&times;</button>
   </a>
 
   <!-- Add new recipe tiles here, following the same pattern -->
@@ -29,6 +34,9 @@
 </div>
 
 <script src="assets/ratings.js"></script>
-<script>renderTocStars();</script>
+<script>
+  renderTocStars();
+  applyHiddenTiles();
+</script>
 </body>
 </html>

@@ -139,3 +139,81 @@ function initServings(baseServings) {
 
   render();
 }
+
+// ---------- Delete a recipe (client-side "soft delete") ----------
+// A real delete of the page itself requires removing its file from the
+// GitHub repo — this only hides it from the table of contents on this
+// device/browser, with an easy undo, so a misclick isn't permanent.
+
+const _memoryHidden = {};
+
+function isHidden(slug) {
+  if (_hasStorage) return localStorage.getItem('hidden:' + slug) === '1';
+  return !!_memoryHidden[slug];
+}
+
+function setHidden(slug, value) {
+  if (_hasStorage) {
+    if (value) localStorage.setItem('hidden:' + slug, '1');
+    else localStorage.removeItem('hidden:' + slug);
+  } else {
+    _memoryHidden[slug] = value;
+  }
+}
+
+function applyHiddenTiles() {
+  let hiddenCount = 0;
+  document.querySelectorAll('[data-slug]').forEach((tile) => {
+    if (isHidden(tile.getAttribute('data-slug'))) {
+      tile.style.display = 'none';
+      hiddenCount++;
+    }
+  });
+  const banner = document.getElementById('hidden-banner');
+  if (!banner) return;
+  banner.innerHTML = '';
+  if (hiddenCount === 0) {
+    banner.style.display = 'none';
+    return;
+  }
+  banner.style.display = 'block';
+  banner.append(hiddenCount + (hiddenCount === 1 ? ' recipe hidden on this device \u2014 ' : ' recipes hidden on this device \u2014 '));
+  const link = document.createElement('a');
+  link.href = '#';
+  link.textContent = 'show them';
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('[data-slug]').forEach((tile) => {
+      setHidden(tile.getAttribute('data-slug'), false);
+      tile.style.display = '';
+    });
+    banner.style.display = 'none';
+  });
+  banner.appendChild(link);
+}
+
+// Delete button on a table-of-contents tile
+function confirmDeleteTile(btn) {
+  const slug = btn.getAttribute('data-slug');
+  const title = btn.getAttribute('data-title') || 'this recipe';
+  const sure = window.confirm(
+    'Delete "' + title + '"?\n\n' +
+    'This removes it from your list on this device (you can undo it right after). ' +
+    'To remove it from the site for good, also delete its page from the GitHub repo.'
+  );
+  if (!sure) return;
+  setHidden(slug, true);
+  applyHiddenTiles();
+}
+
+// Delete link on a recipe page itself — hides it, then returns to the list
+function confirmDeleteFromRecipe(slug, title, indexUrl) {
+  const sure = window.confirm(
+    'Delete "' + title + '"?\n\n' +
+    'This removes it from your list on this device. ' +
+    'To remove it from the site for good, also delete its page from the GitHub repo.'
+  );
+  if (!sure) return;
+  setHidden(slug, true);
+  window.location.href = indexUrl;
+}
